@@ -89,7 +89,7 @@ Matlab scripts that can generate additional data.
 
 ## Project Instructions and Rubric
 
-Note: regardless of the changes you make, your project must be buildable using
+Note: Regardless of the changes you make, your project must be buildable using
 cmake and make!
 
 More information is only accessible by people who are already enrolled in Term 2 (three-term version) or Term 1 (two-term version)
