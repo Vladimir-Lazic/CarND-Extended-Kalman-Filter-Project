@@ -62,4 +62,32 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
    * TODO: update the state by using Extended Kalman Filter equations
    */
+  float rho, phi, rho_dot;
+  VectorXd z_prime, y, Ht, S, Si, K, I;
+
+  // Linearize the non linear prediction and measurement funcitons
+  rho = sqrt(x_(0) * x_(0) + x_(1) * x_(1));
+  phi = atan2(x_(1), x_(0));
+
+  if (fabs(rho) < 0.0001) {
+    rho_dot = 0;
+  } else {
+    rho_dot = (x_(0) * x_(2) + x_(1) * x_(3)) / rho;
+  }
+
+  // Use the same Kalman filter mechanism to estimate the new state
+  z_prime << rho, phi, rho_dot;
+
+  y = z - z_prime;
+
+  Ht = H_.transpose();
+  S = H_ * P_ * Ht + R_;
+  Si = S.inverse();
+  K = P_ * Ht * Si;
+
+  // new estimate
+  x_ = x_ + (K * y);
+  long x_size = x_.size();
+  I = MatrixXd::Identity(x_size, x_size);
+  P_ = (I - K * H_) * P_;
 }
