@@ -48,8 +48,8 @@ class FusionEKF {
   Eigen::MatrixXd Hj_;
 
   // process covariance noises
-  float noise_ax;
-  float noise_ay;
+  double noise_ax;
+  double noise_ay;
 };
 
 #endif  // FusionEKF_H_

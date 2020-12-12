@@ -117,12 +117,12 @@ int main() {
     estimate(3) = v2;
 
     estimations.push_back(estimate);
-
-    cout << "Accuracy - RMSE:" << endl
-         << tools.CalculateRMSE(estimations, ground_truth) << std::endl;
   }
 
-  // VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+
+  cout << "Accuracy - RMSE:" 
+       << RMSE << std::endl;
 
   if (in_file.is_open()) {
     in_file.close();
