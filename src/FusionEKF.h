@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 #include "Eigen/Dense"
 #include "kalman_filter.h"
 #include "measurement_package.h"
@@ -32,7 +33,8 @@ class FusionEKF {
   KalmanFilter ekf_;
 
  private:
-  // check whether the tracking toolbox was initialized or not (first measurement)
+  // check whether the tracking toolbox was initialized or not (first
+  // measurement)
   bool is_initialized_;
 
   // previous timestamp
@@ -46,4 +48,4 @@ class FusionEKF {
   Eigen::MatrixXd Hj_;
 };
 
-#endif // FusionEKF_H_
+#endif  // FusionEKF_H_
