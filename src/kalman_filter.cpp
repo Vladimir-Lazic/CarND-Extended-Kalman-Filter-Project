@@ -64,14 +64,14 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
    * TODO: update the state by using Extended Kalman Filter equations
    */
-  float rho, phi, rho_dot;
+  double rho, phi, rho_dot;
   VectorXd h, y;
   MatrixXd Ht, S, Si, K, I;
 
   // Initializing values
   h = VectorXd(3);
 
-  // Linearize the non linear prediction and measurement funcitons
+  // Linearize the non linear prediction and measurement functions
   rho = sqrt(x_(0) * x_(0) + x_(1) * x_(1));
   phi = atan2(x_(1), x_(0));
 
@@ -86,6 +86,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   y = z - h;
 
+  // Normalizing the y vector
   while (y(1) > M_PI || y(1) < -M_PI) {
     if (y(1) > M_PI) {
       y(1) -= M_PI;
