@@ -3,8 +3,8 @@
 #include <sstream>
 #include <vector>
 
-#include "measurement_package.h"
 #include "FusionEKF.h"
+#include "measurement_package.h"
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -41,7 +41,7 @@ int main() {
   string line;
   // set i to get only first 3 measurments
   int i = 0;
-  while (getline(in_file, line) && (i <= 3)) {
+  while (getline(in_file, line)) {
     MeasurementPackage meas_package;
 
     istringstream iss(line);
@@ -92,13 +92,19 @@ int main() {
     gt_values(2) = vx_gt;
     gt_values(3) = vy_gt;
     ground_truth.push_back(gt_values);
+  }
 
-    // Push the current estimated x,y positon from the Kalman filter's
-    //   state vector
+  // Push the current estimated x,y positon from the Kalman filter's
+  //   state vector
 
-    fusionEKF.ProcessMeasurement(meas_package);
+  VectorXd estimate(4);
 
-    VectorXd estimate(4);
+  size_t N = measurement_pack_list.size();
+  // start filtering from the second frame
+  // (the speed is unknown in the first frame)
+  for (size_t k = 0; k < N; ++k) {
+    std::cout << "Processing measurement : " << k << "/" << N << std::endl;
+    fusionEKF.ProcessMeasurement(measurement_pack_list[k]);
 
     double p_x = fusionEKF.ekf_.x_(0);
     double p_y = fusionEKF.ekf_.x_(1);
@@ -112,8 +118,11 @@ int main() {
 
     estimations.push_back(estimate);
 
-    VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+    cout << "Accuracy - RMSE:" << endl
+         << tools.CalculateRMSE(estimations, ground_truth) << std::endl;
   }
+
+  // VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
   if (in_file.is_open()) {
     in_file.close();
