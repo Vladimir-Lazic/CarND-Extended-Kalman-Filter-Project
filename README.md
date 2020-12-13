@@ -17,16 +17,15 @@ The Kalman Filter Algorithm is a 2 step algorithm: Predict and Update. When a ne
 
 This project dependency is [uWebSocketIO](https://github.com/uWebSockets/uWebSockets). 
 
-However for running the project based with inputs from just the data file, just use the src/input_from_file_main.cpp starting point for the program. This will require you to modify the cmake.
-
 The main program can be built and run by doing the following from the project top directory.
 
 1. mkdir build
 2. cd build
 3. cmake ..
 4. make
-5. ./ExtendedKF
 
+The make file builds two binaries `ExtendedKF` which is a binary that uses uWebSocketIO library and requires simulator to be running. The second one is the `InputFromFIleExtendedKF` which uses data from the input file `./data/obj_pose-laser-radar-synthetic-input.txt` and does not require you ti install the uWebSocketIO library and does not require the use of the simulator. The main function for that binary is the `src/input_from_file_main.cpp` file.
+ 
 ## Measurements 
 
 The measurements in the `./data/obj_pose-laser-radar-synthetic-input.txt` file are the same as the simulator used for this project. Based on this input data and by running the project in the simulator the code produced the following output: 
