@@ -24,7 +24,7 @@ The main program can be built and run by doing the following from the project to
 3. cmake ..
 4. make
 
-The make file builds two binaries `ExtendedKF` which is a binary that uses uWebSocketIO library and requires simulator to be running. The second one is the `InputFromFIleExtendedKF` which uses data from the input file `./data/obj_pose-laser-radar-synthetic-input.txt` and does not require you ti install the uWebSocketIO library and does not require the use of the simulator. The main function for that binary is the `src/input_from_file_main.cpp` file.
+The make file builds two binaries `ExtendedKF` which is a binary that uses uWebSocketIO library and requires simulator to be running. The second one is the `InputFromFIleExtendedKF` which uses data from the input file `./data/obj_pose-laser-radar-synthetic-input.txt` and does not require you to install the uWebSocketIO library and does not require the use of the simulator. The main function for that binary is the `src/input_from_file_main.cpp` file.
  
 ## Measurements 
 
